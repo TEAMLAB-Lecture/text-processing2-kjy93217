@@ -28,7 +28,28 @@ def digits_to_words(input_string):
             >>> tp2.digits_to_words(digits_str2)
             'three one four one five'
     """
-    digit_string = None
+
+    number = ['0','1','2','3','4','5','6','7','8','9']
+    number_dict = {'0':'zero', '1':'one', '2':'two', '3':'three', '4':'four',
+                   '5':'five', '6':'six', '7':'seven', '8':'eight', '9':'nine'}
+
+    number_string = ""
+
+    for i in input_string:
+        if i in number:
+            number_string += i
+    
+    if number_string == "":
+        return ""
+
+    digit_string = ""
+
+    digit_string += number_dict[number_string[0]]
+
+    for i in range(1,len(number_string)):
+        digit_string += " "
+        digit_string += number_dict[number_string[i]]
+
     return digit_string
 
 
@@ -64,5 +85,49 @@ def to_camel_case(underscore_str):
             >>> tp2.to_camel_case(underscore_str3)
             "alreadyCamel"
     """
-    camelcase_str = None
+    
+    if "_" not in underscore_str:
+        return underscore_str
+        
+    lower_str = underscore_str.lower()
+    
+    stack = []
+    flag = False
+
+    for i in lower_str:
+        if i != '_':
+            flag = True
+        if flag == True:
+            stack.append(i)
+
+    if stack == []:
+        return ""
+
+    mid_str = []
+    flag = False
+
+    while stack:
+        temp = stack.pop()
+        if temp != '_':
+            flag = True
+        if flag == True:
+            mid_str.insert(0, temp)
+
+    camelcase_str = ""
+    pre = True
+
+    for i in mid_str:
+        if i == '_' and pre == True:
+            pre = False
+        elif i != '_' and pre == False:
+            camelcase_str += i.upper()
+            pre = True
+        elif i != '_' and pre == True:
+            camelcase_str += i
+
+
     return camelcase_str
+
+
+print(to_camel_case("alreadyCamel"))
+
