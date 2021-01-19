@@ -88,7 +88,7 @@ def to_camel_case(underscore_str):
     
     if "_" not in underscore_str:
         return underscore_str
-        
+
     lower_str = underscore_str.lower()
     
     stack = []
@@ -128,6 +128,4 @@ def to_camel_case(underscore_str):
 
     return camelcase_str
 
-
-print(to_camel_case("alreadyCamel"))
 
