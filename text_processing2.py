@@ -90,45 +90,55 @@ def to_camel_case(underscore_str):
             "alreadyCamel"
     """
     
+    # "_" 가 존재하지 않으면 그대로 출력 (iuput은 underscore case따른다 하지 않았나? ex. alreayCamel) 
     if "_" not in underscore_str:
         return underscore_str
 
-    lower_str = underscore_str.lower()
+    # 모두 소문자로 변환
+    small_str = underscore_str.lower()
     
-    stack = []
+    # 시퀀스의 정뱡향으로 앞에 존재하는 '_' 제거 
+    forward_str = []
     flag = False
 
-    for i in lower_str:
+    for i in small_str:
         if i != '_':
             flag = True
-        if flag == True:
-            stack.append(i)
 
-    if stack == []:
+        if flag == True:
+            forward_str.append(i)
+    
+    # 남아 있는 문자가 없으면 빈 문자열 출력
+    if forward_str == []:
         return ""
 
-    mid_str = []
+    # 시퀀스 역방향으로 맨 뒤에 존재하는 '_' 제거
+    backward_str = []
     flag = False
 
-    while stack:
-        temp = stack.pop()
-        if temp != '_':
+    while forward_str:
+        i = forward_str.pop()
+        if i != '_':
             flag = True
-        if flag == True:
-            mid_str.insert(0, temp)
 
+        if flag == True:
+            backward_str.insert(0, i)
+
+    
+    # 문자열 중간에 위치하는 '_'뒤에 문자는 대문자로 변환
     camelcase_str = ""
     pre = True
 
-    for i in mid_str:
+    for i in backward_str:
         if i == '_' and pre == True:
             pre = False
+
         elif i != '_' and pre == False:
             camelcase_str += i.upper()
             pre = True
+
         elif i != '_' and pre == True:
             camelcase_str += i
-
 
     return camelcase_str
 
