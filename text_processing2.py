@@ -29,21 +29,25 @@ def digits_to_words(input_string):
             'three one four one five'
     """
 
-    number = ['0','1','2','3','4','5','6','7','8','9']
-    number_dict = {'0':'zero', '1':'one', '2':'two', '3':'three', '4':'four',
-                   '5':'five', '6':'six', '7':'seven', '8':'eight', '9':'nine'}
 
+    # 오직 정수인 값 만 찾아내기 위해서 
     number_string = ""
+    number = ['0','1','2','3','4','5','6','7','8','9']
 
     for i in input_string:
         if i in number:
             number_string += i
     
+    # 정수가 존재하지 않으면 공백 출력
     if number_string == "":
         return ""
 
+    # 숫자(정수) 형태의 문자열을 문자 형태로 변환
     digit_string = ""
+    number_dict = {'0':'zero', '1':'one', '2':'two', '3':'three', '4':'four',
+                   '5':'five', '6':'six', '7':'seven', '8':'eight', '9':'nine'} 
 
+    
     digit_string += number_dict[number_string[0]]
 
     for i in range(1,len(number_string)):
